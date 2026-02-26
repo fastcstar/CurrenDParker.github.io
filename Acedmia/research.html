@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curren Parker | Research</title>
+
+  <!-- Libre Baskerville -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --fern-dark: #3E5F34;
+      --fern-main: #6B8E4E;
+      --cream: #F4EBD0;
+      --card-border: rgba(244,235,208,0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--cream);
+      background: linear-gradient(to bottom, var(--fern-main), var(--fern-dark));
+    }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(62,95,52,0.85);
+      border-bottom: 1px solid var(--card-border);
+      backdrop-filter: blur(6px);
+    }
+
+    .nav-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .brand{
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    nav{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-left: auto;
+    }
+
+    nav a{
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    nav a:hover{
+      border-color: var(--card-border);
+      background: rgba(244,235,208,0.12);
+    }
+
+    nav a.active{
+      border-color: var(--card-border);
+      background: rgba(244,235,208,0.18);
+    }
+
+    main{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+
+    h1{
+      font-size: 2.6rem;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+
+    .subtitle{
+      max-width: 900px;
+      margin: 0 0 26px 0;
+      opacity: 0.95;
+      font-size: 1.05rem;
+    }
+
+    .card{
+      background: rgba(127,168,102,0.25);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 28px;
+      margin: 0 0 24px 0;
+    }
+
+    h2{
+      font-size: 1.5rem;
+      margin: 0 0 12px 0;
+    }
+
+    .muted{
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+
+    ul{
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    /* Image Frame (prevents giant image + no cropping) */
+    .research-image-container{
+      display: flex;
+      justify-content: center;
+      margin: 24px 0 34px 0;
+    }
+
+    .research-frame{
+      max-width: 420px;     /* Adjust smaller/larger here */
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid var(--card-border);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.3);
+      background: rgba(244,235,208,0.06);
+    }
+
+    .research-frame img{
+      display: block;
+      width: 100%;
+      height: auto;         /* preserves full image, no crop */
+    }
+
+    .pill-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .pill{
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(244,235,208,0.10);
+      font-size: 0.9rem;
+      opacity: 0.95;
+    }
+
+    .project{
+      border-top: 1px solid rgba(244,235,208,0.25);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .project:first-child{
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .project-title{
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .project-meta{
+      margin: 4px 0 10px 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .two-col{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 820px){
+      .two-col{ grid-template-columns: 1fr; }
+      .research-frame{ max-width: 360px; }
+    }
+
+    /* ---------- Coursework Tables (Fix smushed units/grades) ---------- */
+    .table-wrap{
+      width: 100%;
+      overflow-x: auto;       /* prevents squishing on small screens */
+      border-radius: 14px;
+    }
+
+    table{
+      width: 100%;
+      min-width: 560px;       /* keeps columns readable */
+      border-collapse: collapse;
+      margin-top: 14px;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    th, td{
+      padding: 12px 14px;     /* spacing so it doesn't look cramped */
+      border-bottom: 1px solid rgba(244,235,208,0.25);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th{
+      background: rgba(244,235,208,0.12);
+      font-weight: 700;
+      border-bottom: 1px solid rgba(244,235,208,0.35);
+    }
+
+    /* keep Units/Grade columns from collapsing */
+    td:nth-child(2), th:nth-child(2),
+    td:nth-child(3), th:nth-child(3){
+      white-space: nowrap;
+      width: 90px;
+    }
+
+    td:first-child, th:first-child{
+      width: auto;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="nav-wrap">
+    <div class="brand">Curren Parker</div>
+    <nav>
+      <a href="index.html">Introduction</a>
+      <a class="active" href="research.html">Research</a>
+      <a href="degrees.html">Degrees</a>
+
+      <a href="mentorship.html">Mentorship</a>
+      <a href="skills.html">Additional Skills</a>
+      <a href="cv.html">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Research</h1>
+  <p class="subtitle">
+    I’m especially interested in <strong>astrophysics</strong> and <strong>cosmology</strong>—from the large-scale structure
+    of the universe to the physical processes that shape galaxies, stars, and cosmic evolution. I’m actively seeking
+    undergraduate research opportunities where I can contribute and develop strong computational and analytical foundations.
+  </p>
+
+  <!-- Image -->
+  <div class="research-image-container">
+    <div class="research-frame">
+      <img src="images/Img_4112.jpg" alt="Research Image">
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Research Focus</h2>
+    <p>
+      My goal is to build broad experience while developing a clear research identity in astrophysics and cosmology.
+      I’m motivated by questions involving dark matter, dark energy, and the structure and evolution of cosmic systems.
+    </p>
+
+    <div class="pill-row">
+      <span class="pill">Astrophysics</span>
+      <span class="pill">Cosmology</span>
+      <span class="pill">Large-Scale Structure</span>
+      <span class="pill">Galaxy Formation</span>
+      <span class="pill">Cosmic Evolution</span>
+      <span class="pill">Dark Matter / Dark Energy</span>
+      <span class="pill">Data Analysis</span>
+      <span class="pill">Modeling</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>What I’m Looking For</h2>
+    <p>
+      I am actively seeking <strong>undergraduate research opportunities</strong> in astrophysics or cosmology where I can:
+    </p>
+    <ul>
+      <li>Contribute to a research group through consistent effort and fast learning</li>
+      <li>Build skills in scientific computing, analysis, and technical communication</li>
+      <li>Work with observational data and/or theoretical/computational models</li>
+      <li>Grow toward graduate study and a future Ph.D. program</li>
+    </ul>
+    <p class="muted">
+      I’m open to both observational and theoretical projects, and I’m especially excited by roles that include mentorship
+      and opportunities to present results.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Projects & Experience</h2>
+    <p class="muted">
+      If you don’t have formal research projects yet, that’s totally fine—this section is set up so you can add
+      items as you gain experience.
+    </p>
+
+    <div class="project">
+      <p class="project-title">Student Assistant — Murillo Family Observatory, CSUSB</p>
+      <p class="project-meta">California State University, San Bernardino · 2025 – Present</p>
+      <ul>
+        <li>Assist with public observation events, supporting telescope operations and visitor engagement.</li>
+        <li>Receiving training on MEADE and smaller telescopes, including setup, calibration, and tracking.</li>
+        <li>Shadow graduating students during use of the 24-inch and 17-inch telescopes to gain exposure to advanced observational techniques.</li>
+        <li>Developing hands-on familiarity with astronomical instrumentation and observational workflow.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <p class="project-title">Independent Study / Skills Project (Placeholder)</p>
+      <p class="project-meta">Self-directed · Dates</p>
+      <ul>
+        <li>Example: Reproduced a cosmology result from a paper using Python</li>
+        <li>Example: Practiced analyzing astrophysics data formats</li>
+        <li>Example: Built a small simulation (orbital dynamics, toy models, etc.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <h2>Methods & Tools (Developing)</h2>
+      <ul>
+        <li>Python (scientific computing / analysis)</li>
+        <li>Data visualization and interpretation</li>
+        <li>Mathematical modeling foundations</li>
+        <li>Clear technical writing and communication</li>
+      </ul>
+
+    </div>
+
+    <div class="card">
+      <h2>Future Directions</h2>
+      <p>
+        I’m actively exploring areas within astrophysics and cosmology to refine my focus. I’m especially excited about:
+      </p>
+      <ul>
+        <li>Large-scale structure and cosmological parameter inference</li>
+        <li>Galaxy evolution and feedback mechanisms</li>
+        <li>Dark matter/energy models and observational constraints</li>
+        <li>Working with real survey data and pipelines</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Publications / Posters / Presentations</h2>
+    <ul>
+      <li><em>Coming soon.</em></li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>
